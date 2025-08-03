@@ -1,8 +1,9 @@
 import { body, validationResult } from 'express-validator';
-import { BadRequestError } from '../errors/customErrors';
+import {BadRequestError, NotFoundError} from '../errors/customErrors';
 import { JOB_STATUS, JOB_TYPE } from '../utils/constants.js';
 import { param } from 'express-validator';
 import mongoose from "mongoose";
+import Job from "../client/src/assets/wrappers/Job.js";
 
 const withValidationErrors = (validateValues) => {
   return [
