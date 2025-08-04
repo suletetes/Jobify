@@ -1,11 +1,16 @@
+import { NavLink } from 'react-router-dom';
+import { useDashboardContext } from '../context';
+import links from '../utils/links'; // assuming this is where links are defined
+
 const NavLinks = ({ isBigSidebar }) => {
     const { user, toggleSidebar } = useDashboardContext();
+    const { role } = user;
 
     return (
         <div className='nav-links'>
-            {links.map((link) => {
-                const { text, path, icon } = link;
-                // admin user
+            {links.map(({ text, path, icon }) => {
+                if (role !== 'admin' && path === 'admin') return null;
+
                 return (
                     <NavLink
                         to={path}
