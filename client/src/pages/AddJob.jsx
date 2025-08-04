@@ -1,9 +1,9 @@
-import {FormRow} from '../components';
+import {FormRow, FormRowSelect} from '../components';
 import Wrapper from '../assets/wrappers/DashboardFormPage';
 import {redirect, useOutletContext} from 'react-router-dom';
 import {Form, useNavigation} from 'react-router-dom';
 import customFetch from "../utils/customFetch.js";
-import {JOB_TYPE} from "../../../utils/constants.js";
+import {JOB_STATUS, JOB_TYPE} from "../../../utils/constants.js";
 
 
 export const action = async ({request}) => {
@@ -38,25 +38,18 @@ const AddJob = () => {
                         name='jobLocation'
                         defaultValue={user.location}
                     />
-                    <div className='form-row'>
-                        <label htmlFor='jobStatus' className='form-label'>
-                            job status
-                        </label>
-                        <select
-                            name='jobStatus'
-                            id='jobStatus'
-                            className='form-select'
-                            defaultValue={JOB_TYPE.FULL_TIME}
-                        >
-                            {Object.values(JOB_TYPE).map((itemValue) => {
-                                return (
-                                    <option key={itemValue} value={itemValue}>
-                                        {itemValue}
-                                    </option>
-                                );
-                            })}
-                        </select>
-                    </div>
+                    <FormRowSelect
+                        labelText='job status'
+                        name='jobStatus'
+                        defaultValue={JOB_STATUS.PENDING}
+                        list={Object.values(JOB_STATUS)}
+                    />
+                    <FormRowSelect
+                        name='jobType'
+                        labelText='job type'
+                        defaultValue={JOB_TYPE.FULL_TIME}
+                        list={Object.values(JOB_TYPE)}
+                    />
 
                     <button
                         type='submit'
