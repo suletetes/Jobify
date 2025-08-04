@@ -15,6 +15,16 @@ import {
     Profile
 } from "./pages";
 
+import {action as registerAction} from './pages/Register.jsx'
+import {action as loginAction} from './pages/Login.jsx'
+import {action as DashboardLoader} from './pages/DashboardLayout.jsx'
+import {action as addJobAction} from './pages/AddJob.jsx'
+import {action as allJobsLoader} from './pages/AllJobs.jsx'
+import {loader as editJobLoader} from './pages/EditJob';
+import {action as editJobAction} from './pages/EditJob';
+
+
+
 export const checkDefaultTheme = () => {
     const isDarkTheme =
         localStorage.getItem('darkTheme') === 'true'
@@ -36,15 +46,13 @@ const router = createBrowserRouter([
             },
             {
                 path: 'register',
-                element: <Register />,
-                action: () => {
-                    console.log('hello there');
-                    return null;
-                },
+                element: <Register/>,
+                action: registerAction
             },
             {
                 path: 'login',
-                element: <Login/>
+                element: <Login/>,
+                action: loginAction
             },
             {
                 path: 'dashboard',
@@ -60,7 +68,8 @@ const router = createBrowserRouter([
                     },
                     {
                         path: 'all-jobs',
-                        element: <AllJobs/>
+                        element: <AllJobs/>,
+                        loader: allJobsLoader
                     },
                     {
                         path: 'profile',
@@ -69,7 +78,12 @@ const router = createBrowserRouter([
                     {
                         path: 'admin',
                         element: <Admin/>
-                    }
+                    }, {
+                        path: 'edit-job/:id',
+                        element: <EditJob/>,
+                        loader: editJobLoader,
+                        action: editJobAction,
+                    },
                 ]
             }
 
