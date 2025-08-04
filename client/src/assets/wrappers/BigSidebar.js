@@ -58,5 +58,6 @@ const Wrapper = styled.aside`
       background: var(--background-color);
     }
   }
+    
 `;
 export default Wrapper;
