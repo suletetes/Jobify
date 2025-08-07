@@ -1,12 +1,12 @@
+import { FaTimes } from 'react-icons/fa';
 import Wrapper from '../assets/wrappers/SmallSidebar';
-import {FaTimes} from 'react-icons/fa';
-
+import { useDashboardContext } from '../pages/DashboardLayout';
 import Logo from './Logo';
-import {useDashboardContext} from '../pages/DashboardLayout';
-import NavLinks from "./NavLinks.jsx";
 
+import NavLinks from './NavLinks';
 const SmallSidebar = () => {
-    const {showSidebar, toggleSidebar} = useDashboardContext();
+    const { showSidebar, toggleSidebar } = useDashboardContext();
+
     return (
         <Wrapper>
             <div
@@ -16,16 +16,15 @@ const SmallSidebar = () => {
             >
                 <div className='content'>
                     <button type='button' className='close-btn' onClick={toggleSidebar}>
-                        <FaTimes/>
+                        <FaTimes />
                     </button>
                     <header>
-                        <Logo/>
+                        <Logo />
                     </header>
-                    <NavLinks/>
+                    <NavLinks />
                 </div>
             </div>
         </Wrapper>
     );
 };
-
 export default SmallSidebar;

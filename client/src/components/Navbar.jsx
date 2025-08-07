@@ -1,31 +1,27 @@
-import Wrapper from "../assets/wrappers/Navbar.js";
-import {Logo} from "./index.js";
-import {FaAlignLeft} from "react-icons/fa"
-import {useDashboardContext} from "../pages/DashboardLayout.jsx";
-import LogoutContainer from "./LogoutContainer.jsx";
-import ThemeToggle from "./ThemeToggle.jsx";
-
+import Wrapper from '../assets/wrappers/Navbar';
+import { FaAlignLeft } from 'react-icons/fa';
+import Logo from './Logo';
+import { useDashboardContext } from '../pages/DashboardLayout';
+import LogoutContainer from './LogoutContainer';
+import ThemeToggle from './ThemeToggle';
 const Navbar = () => {
-    const {toggleSidebar} = useDashboardContext()
+    const { toggleSidebar } = useDashboardContext();
     return (
         <Wrapper>
-            <div className="nav-center">
-                <button type="button" className="toggle-btn" onClick={toggleSidebar}>
-                    <FaAlignLeft/>
+            <div className='nav-center'>
+                <button type='button' className='toggle-btn' onClick={toggleSidebar}>
+                    <FaAlignLeft />
                 </button>
                 <div>
-                    <Logo/>
-                    <h4 className="logo-text">dashboard</h4>
+                    <Logo />
+                    <h4 className='logo-text'>dashboard</h4>
                 </div>
-                <div className="btn-container">
+                <div className='btn-container'>
                     <ThemeToggle />
-                    <LogoutContainer/>
-
+                    <LogoutContainer />
                 </div>
-
             </div>
-
         </Wrapper>
-    )
-}
-export default Navbar
+    );
+};
+export default Navbar;

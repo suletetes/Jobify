@@ -1,13 +1,12 @@
-import {FormRow, FormRowSelect} from '.';
+import { FormRow, FormRowSelect, SubmitBtn } from '.';
 import Wrapper from '../assets/wrappers/DashboardFormPage';
-import {Form, useSubmit, Link} from 'react-router-dom';
-import {JOB_TYPE, JOB_STATUS, JOB_SORT_BY} from '../../../utils/constants';
-import {useAllJobsContext} from '../pages/AllJobs';
+import { Form, useSubmit, Link } from 'react-router-dom';
+import { JOB_TYPE, JOB_STATUS, JOB_SORT_BY } from '../../../utils/constants';
+import { useAllJobsContext } from '../pages/AllJobs';
 
 const SearchContainer = () => {
-    const {searchValues} = useAllJobsContext();
-    const {search, jobStatus, jobType, sort} = searchValues;
-
+    const { searchValues } = useAllJobsContext();
+    const { search, jobStatus, jobType, sort } = searchValues;
     const submit = useSubmit();
 
     const debounce = (onChange) => {
@@ -20,15 +19,11 @@ const SearchContainer = () => {
             }, 2000);
         };
     };
-
-
     return (
         <Wrapper>
             <Form className='form'>
                 <h5 className='form-title'>search form</h5>
                 <div className='form-center'>
-                    {/* search position */}
-
                     <FormRow
                         type='search'
                         name='search'
@@ -50,8 +45,8 @@ const SearchContainer = () => {
                     <FormRowSelect
                         labelText='job type'
                         name='jobType'
-                        defaultValue={jobType}
                         list={['all', ...Object.values(JOB_TYPE)]}
+                        defaultValue={jobType}
                         onChange={(e) => {
                             submit(e.currentTarget.form);
                         }}
@@ -72,5 +67,4 @@ const SearchContainer = () => {
         </Wrapper>
     );
 };
-
 export default SearchContainer;
