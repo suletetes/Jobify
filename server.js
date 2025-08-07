@@ -1,9 +1,7 @@
 import 'express-async-errors';
 import * as dotenv from 'dotenv';
-
 dotenv.config();
 import express from 'express';
-
 const app = express();
 import morgan from 'morgan';
 import mongoose from 'mongoose';
@@ -16,16 +14,14 @@ import mongoSanitize from 'express-mongo-sanitize';
 import jobRouter from './routes/jobRouter.js';
 import authRouter from './routes/authRouter.js';
 import userRouter from './routes/userRouter.js';
-
-
 // public
-import {dirname} from 'path';
-import {fileURLToPath} from 'url';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 import path from 'path';
 
 // middleware
 import errorHandlerMiddleware from './middleware/errorHandlerMiddleware.js';
-import {authenticateUser} from './middleware/authMiddleware.js';
+import { authenticateUser } from './middleware/authMiddleware.js';
 
 cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
@@ -48,7 +44,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/api/v1/test', (req, res) => {
-    res.json({msg: 'test route'});
+    res.json({ msg: 'test route' });
 });
 
 app.use('/api/v1/jobs', authenticateUser, jobRouter);
@@ -60,7 +56,7 @@ app.get('*', (req, res) => {
 });
 
 app.use('*', (req, res) => {
-    res.status(404).json({msg: 'not found'});
+    res.status(404).json({ msg: 'not found' });
 });
 
 app.use(errorHandlerMiddleware);
