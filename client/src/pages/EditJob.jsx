@@ -28,7 +28,6 @@ export const loader =
       return redirect('/dashboard/all-jobs');
     }
   };
-
 export const action =
   (queryClient) =>
   async ({ request, params }) => {
