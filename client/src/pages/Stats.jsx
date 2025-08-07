@@ -1,27 +1,29 @@
-import {ChartsContainer, StatsContainer} from '../components';
+import { ChartsContainer, StatsContainer } from '../components';
 import customFetch from '../utils/customFetch';
-import {useLoaderData} from 'react-router-dom';
-import {useQuery} from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
-export const loader = async () => {
-    return null;
+const statsQuery = {
+    queryKey: ['stats'],
+    queryFn: async () => {
+        const response = await customFetch.get('/jobs/statss');
+        return response.data;
+    },
+};
+
+export const loader = (queryClient) => async () => {
+    const data = await queryClient.ensureQueryData(statsQuery);
+    return data;
 };
 
 const Stats = () => {
-    const response = useQuery({
-        queryKey: ['stats'],
-        queryFn: () => customFetch.get('/jobs/stats'),
-    });
-    console.log(response);
-    if (response.isLoading) {
-        return <h1>Loading...</h1>;
-    }
-    // return <h1>react query</h1>;
+    const { data } = useQuery(statsQuery);
+    const { defaultStats, monthlyApplications } = data;
+
     return (
         <>
-            <StatsContainer defaultStats={defaultStats}/>
+            <StatsContainer defaultStats={defaultStats} />
             {monthlyApplications?.length > 1 && (
-                <ChartsContainer data={monthlyApplications}/>
+                <ChartsContainer data={monthlyApplications} />
             )}
         </>
     );
